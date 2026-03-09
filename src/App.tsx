@@ -1,15 +1,16 @@
 import './App.css'
 import {type ChangeEvent, type FormEvent, useState} from "react";
 
-function App() {
 
+
+function App() {
     // Gutku drogi Tutaj nie rozumiem w 100% ale tak jest na stronie Pana Sazeda
     function handleInputChange(e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
         console.log("Zmiana w polu:", e.target.name);
         console.log("Wartość:", e.target.value);
     }
 
-    // --- STANY ---
+    // --- Consty ---
     const [imie, setImie] = useState("");
     const [sprzet, setSprzet] = useState("kajak");
     const [godziny, setGodziny] = useState(1);
@@ -19,8 +20,6 @@ function App() {
     function handleSubmit(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
 
-        //Chyba coś zespułemXDDD
-        //Jednak Działa
 
         let stawka = 0;
         if (sprzet === 'kajak') stawka = 20;
@@ -116,7 +115,7 @@ function App() {
                 </label>
 
                 <br /><br />
-                <button type="submit">Przejdź dalej</button>
+                <button type="submit">Przejdź do płatnośći</button>
             </form>
         </div>
     )
@@ -124,4 +123,7 @@ function App() {
 
 //Chyba coś zespułemXDDD
 //Jednak Działa
+//Do poprawy:
+//Zamiast Alertu blok
+//Opcja płatnośći
 export default App
