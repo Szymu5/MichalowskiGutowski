@@ -51,7 +51,9 @@ Wymień co najmniej 3 właściwości CSS).
 ## 6. Wnioski z realizacji projektu (SDLC)
 (Krótka autorefleksja zespołu).
 * **Co było najtrudniejsze?** [WPISZ TUTAJ]
-* **Czego nowego się nauczyliście?** [WPISZ TUTAJ]
+* **Czego nowego się nauczyliście?** Wykorzystywanie AI nie jako bezmyślne narzędzie lecz nardzędzie które potrafi wytłumaczyć oraz przyśpieszyć proces pisania kodu.
+Praca w zespole.
+Rozwiązanie problemów z narzędziem pracy.
 * **Co byście zmienili, gdybyście mieli więcej czasu?** [WPISZ TUTAJ]
 ---
 ## 7. Checklisty (Zaznacz [x])
