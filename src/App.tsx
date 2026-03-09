@@ -1,49 +1,93 @@
-import { useState, useMemo } from 'react'
 import './App.css'
+import type { ChangeEvent, FormEvent } from "react";
 
 function App() {
-  const [imie, setImie] = useState('')
-  const [sprzet, setSprzet] = useState('kajak')
-  const [godziny, setGodziny] = useState(1)
-  const [kapok, setKapok] = useState(false)
-  const [instruktor, setInstruktor] = useState(false)
-  const [regulamin, setRegulamin] = useState(false)
 
-  const cena = useMemo(() => {
-    let stawka = sprzet === 'kajak' ? 20 : sprzet === 'rower' ? 35 : 150
-    let suma = stawka * godziny
-    if (kapok) suma += 5
-    if (instruktor) suma += (50 * godziny)
-    return suma
-  }, [sprzet, godziny, kapok, instruktor])
+    // Gutku drogi Tutaj nie rozumiem w 100% ale tak jest na stronie Pana Sazeda
+    function handleInputChange(e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
+        console.log("Zmiana w polu:", e.target.name);
+        console.log("Wartość:", e.target.value);
+    }
 
-  return (
-    <div className="apka-kontener">
-      <h1>Kalkulator Mazurska Przystań ⛵</h1>
-      <div className="formularz">
-        <input type="text" placeholder="Twoje imię" onChange={(e) => setImie(e.target.value)} />
-        
-        <select onChange={(e) => setSprzet(e.target.value)}>
-          <option value="kajak">Kajak (20zł/h)</option>
-          <option value="rower">Rower wodny (35zł/h)</option>
-          <option value="omega">Omega (150zł/h)</option>
-        </select>
 
-        {sprzet === 'omega' && <p style={{color: 'red'}}>❗ Wymagany patent!</p>}
+    function handleSubmit(e: FormEvent<HTMLFormElement>) {
 
-        <label>Czas: {godziny}h</label>
-        <input type="range" min="1" max="8" value={godziny} onChange={(e) => setGodziny(Number(e.target.value))} />
 
-        <label><input type="checkbox" onChange={(e) => setKapok(e.target.checked)} /> Kapok (+5zł)</label>
-        <label><input type="checkbox" onChange={(e) => setInstruktor(e.target.checked)} /> Instruktor (+50zł/h)</label>
-        
-        <label><input type="checkbox" onChange={(e) => setRegulamin(e.target.checked)} /> Akceptuję regulamin</label>
 
-        <h2 className="wynik">Suma: {cena} zł</h2>
-        
-        <button disabled={!regulamin} onClick={() => alert('Zarezerwowano!')}>Rezerwuję</button>
-      </div>
-    </div>
-  )
+        const form = e.currentTarget;
+        const imie = (form.elements.namedItem('imie') as HTMLInputElement).value;
+        const sprzet = (form.elements.namedItem('sprzet') as HTMLSelectElement).value;
+        const godziny = Number((form.elements.namedItem('godziny') as HTMLInputElement).value);
+        const czyKapok = (form.elements.namedItem('kapok') as HTMLInputElement).checked;
+        const czyInstruktor = (form.elements.namedItem('instruktor') as HTMLInputElement).checked;
+
+
+        let stawka = 0;
+        if (sprzet === 'kajak') stawka = 20;
+        if (sprzet === 'rower') stawka = 35;
+        if (sprzet === 'omega') stawka = 150;
+
+        let suma = stawka * godziny;
+        if (czyKapok) suma += 5;
+        if (czyInstruktor) suma += (50 * godziny);
+
+        alert("Ahoj " + imie + "! Koszt Twojej rezerwacji to: " + suma + " zł.");
+    }
+
+    return (
+        <div className="apka-kontener">
+            <h1>Mazurska Przystań - Rezerwacja </h1>
+
+            <form onSubmit={handleSubmit} className="formularz">
+                <p>Imię klienta:</p>
+                <input
+                    name="imie"
+                    type="text"
+                    onChange={handleInputChange}
+                    placeholder="Wpisz imię..."
+                    required
+                />
+
+                <p>Wybierz sprzęt:</p>
+                <select name="sprzet" onChange={handleInputChange as any}>
+                    <option value="kajak">Kajak (20 zł/h)</option>
+                    <option value="rower">Rower wodny (35 zł/h)</option>
+                    <option value="omega">Omega (150 zł/h)</option>
+                </select>
+
+                <p>Ile godzin (1-8):</p>
+                <input
+                    name="godziny"
+                    type="range"
+                    min="1"
+                    max="8"
+                    defaultValue="1"
+                    onChange={handleInputChange}
+                />
+
+                <div className="dodatki">
+                    <label>
+                        <input name="kapok" type="checkbox" onChange={handleInputChange} />
+                        Kapok (+5 zł)
+                    </label>
+                    <br />
+                    <label>
+                        <input name="instruktor" type="checkbox" onChange={handleInputChange} />
+                        Instruktor (+50 zł/h)
+                    </label>
+                </div>
+
+                <br />
+                <label>
+                    <input name="regulamin" type="checkbox" required />
+                    Akceptuję regulamin
+                </label>
+
+                <br /><br />
+                <button type="submit">Przejdź dalej</button>
+            </form>
+        </div>
+    )
 }
+
 export default App
