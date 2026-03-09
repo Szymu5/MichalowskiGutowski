@@ -36,7 +36,7 @@ function App() {
 
     return (
         <div className="Div">
-            <h1>Mazurska Przystań - Rezerwacja </h1>
+            <h1>⚓Mazurska Przystań - Rezerwacja⛵ </h1>
 
             <form onSubmit={handleSubmit} className="formularz">
                 <p>Imię klienta:</p>
@@ -49,7 +49,7 @@ function App() {
                 />
 
                 <p>Wybierz sprzęt:</p>
-                <select name="sprzet" onChange={handleInputChange as any}>
+                <select name="sprzet" onChange={handleInputChange}>
                     <option value="kajak">Kajak (20 zł/h)</option>
                     <option value="rower">Rower wodny (35 zł/h)</option>
                     <option value="omega">Omega (150 zł/h)</option>
@@ -78,8 +78,9 @@ function App() {
                 </div>
 
                 <br />
-                <label>
-                    <input name="regulamin" type="checkbox" required />
+
+                <label className="regulamin">
+                    <input name="regulamin" type="checkbox" required id={"regulamin"} />
                     Akceptuję regulamin
                 </label>
 
@@ -90,4 +91,5 @@ function App() {
     )
 }
 //Chyba coś zespułemXDDD
+//Jednak Działa
 export default App
