@@ -87,5 +87,5 @@ function App() {
         </div>
     )
 }
-
+//Wczoraj zasnałem podczas pisania kodu nie dobrze
 export default App
