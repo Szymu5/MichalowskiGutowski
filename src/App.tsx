@@ -2,39 +2,41 @@ import './App.css'
 import type { ChangeEvent, FormEvent } from "react";
 
 function App() {
-//Tutaj trochę nie rozumiem
-    function handleInputChange(e: ChangeEvent<HTMLInputElement | HTMLSelectElement>): void {
-        console.log(e.target.value);
+
+    // Gutku drogi Tutaj nie rozumiem w 100% ale tak jest na stronie Pana Sazeda
+    function handleInputChange(e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
+        console.log("Zmiana w polu:", e.target.name);
+        console.log("Wartość:", e.target.value);
     }
 
-    function handleSubmit(e: FormEvent<HTMLFormElement>): void {
-        e.preventDefault();
 
-        const form: HTMLFormElement = e.currentTarget;
+    function handleSubmit(e: FormEvent<HTMLFormElement>) {
 
-        let imie: string = (form.elements.namedItem('imie') as HTMLInputElement).value;
-        let sprzet: string = (form.elements.namedItem('sprzet') as HTMLSelectElement).value;
-        let godziny: number = Number((form.elements.namedItem('godziny') as HTMLInputElement).value);
-        let czyKapok: boolean = (form.elements.namedItem('kapok') as HTMLInputElement).checked;
-        let czyInstruktor: boolean = (form.elements.namedItem('instruktor') as HTMLInputElement).checked;
 
-        let stawka: number = 0;
 
+        const form = e.currentTarget;
+        const imie = (form.elements.namedItem('imie') as HTMLInputElement).value;
+        const sprzet = (form.elements.namedItem('sprzet') as HTMLSelectElement).value;
+        const godziny = Number((form.elements.namedItem('godziny') as HTMLInputElement).value);
+        const czyKapok = (form.elements.namedItem('kapok') as HTMLInputElement).checked;
+        const czyInstruktor = (form.elements.namedItem('instruktor') as HTMLInputElement).checked;
+
+
+        let stawka = 0;
         if (sprzet === 'kajak') stawka = 20;
         if (sprzet === 'rower') stawka = 35;
         if (sprzet === 'omega') stawka = 150;
 
-        let suma: number = stawka * godziny;
+        let suma = stawka * godziny;
+        if (czyKapok) suma += 5;
+        if (czyInstruktor) suma += (50 * godziny);
 
-        if (czyKapok === true) suma = suma + 5;
-        if (czyInstruktor === true) suma = suma + (50 * godziny);
-
-        alert(  "Cześć " + imie + "! Koszt rezerwacji wynosi " + suma + " zł.");
+        alert("Ahoj " + imie + "! Koszt Twojej rezerwacji to: " + suma + " zł.");
     }
 
     return (
         <div className="apka-kontener">
-            <h1>Mazurska Przystań </h1>
+            <h1>Mazurska Przystań - Rezerwacja </h1>
 
             <form onSubmit={handleSubmit} className="formularz">
                 <p>Imię klienta:</p>
@@ -53,7 +55,7 @@ function App() {
                     <option value="omega">Omega (150 zł/h)</option>
                 </select>
 
-                <p>Czas wynajmu (1-8h):</p>
+                <p>Ile godzin (1-8):</p>
                 <input
                     name="godziny"
                     type="range"
@@ -82,10 +84,10 @@ function App() {
                 </label>
 
                 <br /><br />
-                <button type="submit">Zarezerwuj i licz cenę</button>
+                <button type="submit">Przejdź dalej</button>
             </form>
         </div>
     )
 }
-//Wczoraj zasnałem podczas pisania kodu nie dobrze
+
 export default App
