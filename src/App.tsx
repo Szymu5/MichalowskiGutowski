@@ -31,11 +31,11 @@ function App() {
         if (czyKapok) suma += 5;
         if (czyInstruktor) suma += (50 * godziny);
 
-        alert("Ahoj " + imie + "! Koszt Twojej rezerwacji to: " + suma + " zł.");
+        alert("Cześć " + imie + "! Koszt Twojej rezerwacji to: " + suma + " zł.");
     }
 
     return (
-        <div className="apka-kontener">
+        <div className="Div">
             <h1>Mazurska Przystań - Rezerwacja </h1>
 
             <form onSubmit={handleSubmit} className="formularz">
@@ -89,5 +89,5 @@ function App() {
         </div>
     )
 }
-
+//Chyba coś zespułemXDDD
 export default App
