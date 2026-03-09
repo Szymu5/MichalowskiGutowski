@@ -1,5 +1,5 @@
 import './App.css'
-import type { ChangeEvent, FormEvent } from "react";
+import {type ChangeEvent, type FormEvent, useState} from "react";
 
 function App() {
 
@@ -9,18 +9,18 @@ function App() {
         console.log("Wartość:", e.target.value);
     }
 
+    // --- STANY ---
+    const [imie, setImie] = useState("");
+    const [sprzet, setSprzet] = useState("kajak");
+    const [godziny, setGodziny] = useState(1);
+    const [czyKapok, setCzyKapok] = useState(false);
+    const [czyInstruktor, setCzyInstruktor] = useState(false);
 
     function handleSubmit(e: FormEvent<HTMLFormElement>) {
+        e.preventDefault();
 
-
-
-        const form = e.currentTarget;
-        const imie = (form.elements.namedItem('imie') as HTMLInputElement).value;
-        const sprzet = (form.elements.namedItem('sprzet') as HTMLSelectElement).value;
-        const godziny = Number((form.elements.namedItem('godziny') as HTMLInputElement).value);
-        const czyKapok = (form.elements.namedItem('kapok') as HTMLInputElement).checked;
-        const czyInstruktor = (form.elements.namedItem('instruktor') as HTMLInputElement).checked;
-
+        //Chyba coś zespułemXDDD
+        //Jednak Działa
 
         let stawka = 0;
         if (sprzet === 'kajak') stawka = 20;
@@ -43,13 +43,24 @@ function App() {
                 <input
                     name="imie"
                     type="text"
-                    onChange={handleInputChange}
+                    value={imie}
+                    onChange={(e) => {
+                        handleInputChange(e);
+                        setImie(e.target.value);
+                    }}
                     placeholder="Wpisz imię..."
                     required
                 />
 
                 <p>Wybierz sprzęt:</p>
-                <select name="sprzet" onChange={handleInputChange}>
+                <select
+                    name="sprzet"
+                    value={sprzet}
+                    onChange={(e) => {
+                        handleInputChange(e);
+                        setSprzet(e.target.value);
+                    }}
+                >
                     <option value="kajak">Kajak (20 zł/h)</option>
                     <option value="rower">Rower wodny (35 zł/h)</option>
                     <option value="omega">Omega (150 zł/h)</option>
@@ -61,18 +72,38 @@ function App() {
                     type="range"
                     min="1"
                     max="8"
-                    defaultValue="1"
-                    onChange={handleInputChange}
+                    value={godziny}
+                    onChange={(e) => {
+                        handleInputChange(e);
+                        setGodziny(Number(e.target.value));
+                    }}
                 />
+                <p>Wybrano: {godziny} h</p>
 
                 <div className="dodatki">
                     <label>
-                        <input name="kapok" type="checkbox" onChange={handleInputChange} />
+                        <input
+                            name="kapok"
+                            type="checkbox"
+                            checked={czyKapok}
+                            onChange={(e) => {
+                                handleInputChange(e);
+                                setCzyKapok(e.target.checked);
+                            }}
+                        />
                         Kapok (+5 zł)
                     </label>
                     <br />
                     <label>
-                        <input name="instruktor" type="checkbox" onChange={handleInputChange} />
+                        <input
+                            name="instruktor"
+                            type="checkbox"
+                            checked={czyInstruktor}
+                            onChange={(e) => {
+                                handleInputChange(e);
+                                setCzyInstruktor(e.target.checked);
+                            }}
+                        />
                         Instruktor (+50 zł/h)
                     </label>
                 </div>
@@ -90,6 +121,7 @@ function App() {
         </div>
     )
 }
+
 //Chyba coś zespułemXDDD
 //Jednak Działa
 export default App
