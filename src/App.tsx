@@ -29,7 +29,7 @@ function App() {
         if (czyKapok === true) suma = suma + 5;
         if (czyInstruktor === true) suma = suma + (50 * godziny);
 
-        alert("Ahoj " + imie + "! Koszt rezerwacji: " + suma + " zł.");
+        alert(  "Cześć " + imie + "! Koszt rezerwacji wynosi " + suma + " zł.");
     }
 
     return (
