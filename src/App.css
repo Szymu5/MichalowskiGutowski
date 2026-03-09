@@ -40,3 +40,86 @@
 .read-the-docs {
   color: #888;
 }
+.apka-kontener {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f0f4f8;
+  font-family: sans-serif;
+  padding: 20px;
+}
+
+.formularz {
+  display: flex;
+  flex-direction: column;
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  gap: 10px;
+}
+
+h1 {
+  text-align: center;
+  color: #2c3e50;
+  margin-bottom: 20px;
+}
+
+input[type="text"],
+select,
+input[type="number"] {
+  padding: 10px;
+  border: 1px solid #dcdfe6;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+input[type="range"] {
+  cursor: pointer;
+}
+
+.dodatki {
+  background: #f9fafc;
+  padding: 15px;
+  border-radius: 8px;
+  border: 1px solid #ebeef5;
+  margin: 10px 0;
+}
+
+.dodatki label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+button {
+  background-color: #3498db;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+  margin-top: 10px;
+}
+
+button:hover:not(:disabled) {
+  background-color: #2980b9;
+}
+
+button:disabled {
+  background-color: #bdc3c7;
+  cursor: not-allowed;
+}
+
+p {
+  margin: 5px 0;
+  font-weight: 600;
+  color: #34495e;
+}
