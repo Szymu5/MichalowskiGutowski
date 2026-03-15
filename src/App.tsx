@@ -1,40 +1,48 @@
 import './App.css'
-import {type ChangeEvent, type FormEvent, useState} from "react";
+import {type ChangeEvent, type FormEvent, useState } from "react";
 
 function App() {
-    function handleInputChange(e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
-        console.log("Zmiana w polu:", e.target.name);
-        console.log("Wartość:", e.target.value);
-    }
+
     const [imie, setImie] = useState("");
     const [sprzet, setSprzet] = useState("kajak");
     const [godziny, setGodziny] = useState(1);
     const [czyKapok, setCzyKapok] = useState(false);
     const [czyInstruktor, setCzyInstruktor] = useState(false);
 
+    function handleInputChange(e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
+        console.log("Zmiana w polu:", e.target.name);
+        console.log("Wartość:", e.target.value);
+    }
+
     function handleSubmit(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
 
         let stawka = 0;
-        if (sprzet === 'kajak') stawka = 20;
-        if (sprzet === 'rower') stawka = 35;
-        if (sprzet === 'omega') stawka = 150;
+        switch (sprzet) {
+            case "kajak":
+                stawka = 20;
+                break;
+            case "rower":
+                stawka = 35;
+                break;
+            case "omega":
+                stawka = 150;
+                break;
+        }
 
         let suma = stawka * godziny;
-        if (czyKapok) suma += 5;
-        if (czyInstruktor) suma += (50 * godziny);
 
-        alert("Cześć " + imie + "! Koszt Twojej rezerwacji to: " + suma + " zł.");
+        if (czyKapok) suma += 5;
+        if (czyInstruktor) suma += 50 * godziny;
+
+        alert(`Cześć ${imie}! Koszt Twojej rezerwacji to: ${suma} zł.`);
     }
 
     return (
         <div className="Div">
-            <h1>⚓Mazurska Przystań - Rezerwacja⛵</h1>
+            <h1>⚓ Mazurska Przystań - Rezerwacja ⛵</h1>
 
-            {/* JEDYNA POPRAWKA ↓↓↓ */}
             <form className="formularz" onSubmit={handleSubmit}>
-                {/* ↑↑↑ */}
-
                 <p>Imię klienta:</p>
                 <input
                     name="imie"
@@ -49,7 +57,6 @@ function App() {
                 />
 
                 <p>Wybierz sprzęt:</p>
-
                 <select
                     name="sprzet"
                     value={sprzet}
@@ -62,7 +69,8 @@ function App() {
                     <option value="rower">Rower wodny (35 zł/h)</option>
                     <option value="omega">Omega (150 zł/h)</option>
                 </select>
-                <p>Ile godzin (1-8):</p>
+
+                <p>Ile godzin (1–8):</p>
                 <input
                     name="godziny"
                     type="range"
@@ -75,6 +83,7 @@ function App() {
                     }}
                 />
                 <p>Wybrano: {godziny} h</p>
+
                 <div className="dodatki">
                     <label>
                         <input
@@ -88,6 +97,7 @@ function App() {
                         />
                         Kapok (+5 zł)
                     </label>
+
                     <label>
                         <input
                             name="instruktor"
@@ -101,8 +111,13 @@ function App() {
                         Instruktor (+50 zł/h)
                     </label>
                 </div>
+
                 <label className="regulamin">
-                    <input name="regulamin" type="checkbox" required id={"regulamin"} />
+                    <input
+                        name="regulamin"
+                        type="checkbox"
+                        required
+                    />
                     Akceptuję regulamin
                 </label>
 

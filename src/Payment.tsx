@@ -1,7 +1,19 @@
-import './App.css'
-import './Payment.css'
+import { useLocation } from "react-router-dom";
+import './App.css';
+import './Payment.css';
 
 function Payment() {
+    const { state } = useLocation();
+
+    if (!state) {
+        return (
+            <div className="Div">
+                <h1>Brak danych rezerwacji</h1>
+                <p>Wróć do strony głównej i wypełnij formularz.</p>
+            </div>
+        );
+    }
+
     return (
         <div className="Div">
             <header className="Header">
@@ -11,13 +23,13 @@ function Payment() {
 
             <h2>Podsumowanie rezerwacji:</h2>
 
-            <p>Imię: ....................</p>
-            <p>Sprzęt: ....................</p>
-            <p>Godziny: ....................</p>
-            <p>Kapok: Tak / Nie</p>
-            <p>Instruktor: Tak / Nie</p>
+            <p>Imię: {state.imie}</p>
+            <p>Sprzęt: {state.sprzet}</p>
+            <p>Godziny: {state.godziny}</p>
+            <p>Kapok: {state.czyKapok ? "Tak" : "Nie"}</p>
+            <p>Instruktor: {state.czyInstruktor ? "Tak" : "Nie"}</p>
 
-            <h2>Do zapłaty: .......... zł</h2>
+            <h2>Do zapłaty: {state.suma} zł</h2>
         </div>
     );
 }
