@@ -1,4 +1,4 @@
-
+import './App.css'
 import './Payment.css'
 
 function Payment() {
