@@ -51,8 +51,11 @@ function App() {
 
                 <select
                     name="sprzet"
-                    value="kajak"
-                    onChange={() => {}}
+                    value={sprzet}
+                    onChange={(e) => {
+                        handleInputChange(e);
+                        setSprzet(e.target.value);
+                    }}
                 >
                     <option value="kajak">Kajak (20 zł/h)</option>
                     <option value="rower">Rower wodny (35 zł/h)</option>
