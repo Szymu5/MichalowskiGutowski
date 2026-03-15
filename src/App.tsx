@@ -1,6 +1,34 @@
 import './App.css'
+import {type ChangeEvent, type FormEvent, useState} from "react";
 
 function App() {
+    function handleInputChange(e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
+        console.log("Zmiana w polu:", e.target.name);
+        console.log("Wartość:", e.target.value);
+    }
+    const [imie, setImie] = useState("");
+    const [sprzet, setSprzet] = useState("kajak");
+    const [godziny, setGodziny] = useState(1);
+    const [czyKapok, setCzyKapok] = useState(false);
+    const [czyInstruktor, setCzyInstruktor] = useState(false);
+
+    function handleSubmit(e: FormEvent<HTMLFormElement>) {
+        e.preventDefault();
+
+
+        let stawka = 0;
+        if (sprzet === 'kajak') stawka = 20;
+        if (sprzet === 'rower') stawka = 35;
+        if (sprzet === 'omega') stawka = 150;
+
+        let suma = stawka * godziny;
+        if (czyKapok) suma += 5;
+        if (czyInstruktor) suma += (50 * godziny);
+
+        alert("Cześć " + imie + "! Koszt Twojej rezerwacji to: " + suma + " zł.");
+    }
+
+
     return (
         <div className="Div">
             <h1>⚓Mazurska Przystań - Rezerwacja⛵</h1>
@@ -10,8 +38,12 @@ function App() {
                 <input
                     name="imie"
                     type="text"
-                    value=""
-                    onChange={() => {}}
+                    value={imie}
+                    onChange={(e) => {
+                        handleInputChange(e);
+                        setImie(e.target.value);
+                    }}
+                    placeholder="Wpisz imię..."
                     required
                 />
 
@@ -32,17 +64,23 @@ function App() {
                     type="range"
                     min="1"
                     max="8"
-                    value="1"
-                    onChange={() => {}}
+                    value={godziny}
+                    onChange={(e) => {
+                        handleInputChange(e);
+                        setGodziny(Number(e.target.value));
+                    }}
                 />
-                <p>Wybrano: 1 h</p>
+                <p>Wybrano: {godziny} h</p>
                 <div className="dodatki">
                     <label>
                         <input
                             name="kapok"
                             type="checkbox"
-                            checked={false}
-                            onChange={() => {}}
+                            checked={czyKapok}
+                            onChange={(e) => {
+                                handleInputChange(e);
+                                setCzyKapok(e.target.checked);
+                            }}
                         />
                         Kapok (+5 zł)
                     </label>
