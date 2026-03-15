@@ -15,7 +15,6 @@ function App() {
     function handleSubmit(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
 
-
         let stawka = 0;
         if (sprzet === 'kajak') stawka = 20;
         if (sprzet === 'rower') stawka = 35;
@@ -28,12 +27,14 @@ function App() {
         alert("Cześć " + imie + "! Koszt Twojej rezerwacji to: " + suma + " zł.");
     }
 
-
     return (
         <div className="Div">
             <h1>⚓Mazurska Przystań - Rezerwacja⛵</h1>
 
-            <form className="formularz">
+            {/* JEDYNA POPRAWKA ↓↓↓ */}
+            <form className="formularz" onSubmit={handleSubmit}>
+                {/* ↑↑↑ */}
+
                 <p>Imię klienta:</p>
                 <input
                     name="imie"
