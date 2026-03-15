@@ -88,14 +88,17 @@ function App() {
                         <input
                             name="instruktor"
                             type="checkbox"
-                            checked={false}
-                            onChange={() => {}}
+                            checked={czyInstruktor}
+                            onChange={(e) => {
+                                handleInputChange(e);
+                                setCzyInstruktor(e.target.checked);
+                            }}
                         />
                         Instruktor (+50 zł/h)
                     </label>
                 </div>
                 <label className="regulamin">
-                    <input name="regulamin" type="checkbox" required />
+                    <input name="regulamin" type="checkbox" required id={"regulamin"} />
                     Akceptuję regulamin
                 </label>
 
