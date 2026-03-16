@@ -67,7 +67,7 @@ function App() {
                 >
                     <option value="kajak">Kajak (20 zł/h)</option>
                     <option value="rower">Rower wodny (35 zł/h)</option>
-                    <option value="omega">Omega (150 zł/h)</option>
+                    <option value="omega">Omega (150 zł/h) Uwaga Wymagany paten!!</option>
                 </select>
 
                 <p>Ile godzin (1–8):</p>
