@@ -1,15 +1,17 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import './App.css';
 import './Payment.css';
 
 function Payment() {
     const { state } = useLocation();
+    const navigate = useNavigate();
 
+    // Jeśli ktoś wejdzie bezpośrednio na /payment bez danych, wróć go do startu
     if (!state) {
         return (
             <div className="Div">
                 <h1>Brak danych rezerwacji</h1>
-                <p>Wróć do strony głównej i wypełnij formularz.</p>
+                <button onClick={() => navigate("/")}>Wróć do formularza</button>
             </div>
         );
     }
@@ -21,15 +23,18 @@ function Payment() {
                 <p>Ta strona jest w budowie...</p>
             </header>
 
-            <h2>Podsumowanie rezerwacji:</h2>
+            <div style={{ textAlign: 'left', margin: '20px 0', padding: '15px', border: '1px solid #ccc' }}>
+                <h2>Podsumowanie rezerwacji:</h2>
+                <p><strong>Imię:</strong> {state.imie}</p>
+                <p><strong>Sprzęt:</strong> {state.sprzet}</p>
+                <p><strong>Godziny:</strong> {state.godziny}</p>
+                <p><strong>Kapok:</strong> {state.czyKapok ? "Tak" : "Nie"}</p>
+                <p><strong>Instruktor:</strong> {state.czyInstruktor ? "Tak" : "Nie"}</p>
+                <hr />
+                <h2 style={{ color: 'green' }}>Do zapłaty: {state.suma} zł</h2>
+            </div>
 
-            <p>Imię: {state.imie}</p>
-            <p>Sprzęt: {state.sprzet}</p>
-            <p>Godziny: {state.godziny}</p>
-            <p>Kapok: {state.czyKapok ? "Tak" : "Nie"}</p>
-            <p>Instruktor: {state.czyInstruktor ? "Tak" : "Nie"}</p>
-
-            <h2>Do zapłaty: {state.suma} zł</h2>
+            <button onClick={() => navigate("/")}>⬅ Anuluj i wróć</button>
         </div>
     );
 }
